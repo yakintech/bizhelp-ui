@@ -1,25 +1,19 @@
-import { Button } from '@mui/material'
 import { GridColDef } from '@mui/x-data-grid'
-
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import BYZButton from '../../../../components/core-componens/button'
 import BYZGrid from '../../../../components/core-componens/grid'
-
+import { axiosInstance } from '../../../../network/axiosInstance'
+import { useNavigate } from 'react-router-dom'
 
 
 function List() {
 
     const [products, setproducts] = useState([])
 
-    //data grid localization
-
-
+    const navigate = useNavigate()
 
     useEffect(() => {
-
         loadProducts()
-
     }, [])
 
     const removeProduct = (id: number) => {
@@ -28,7 +22,9 @@ function List() {
         const confirm = window.confirm('Are you sure?')
         if (!confirm) return
 
-        axios.delete(`https://northwind.vercel.app/api/products/${id}`)
+        
+
+        axiosInstance.delete(`products/${id}`)
             .then(res => {
                 loadProducts()
                 // let filteredProducts = products.filter(p => p.id !== id)
@@ -39,7 +35,7 @@ function List() {
 
 
     const loadProducts = () => {
-        axios.get('https://northwind.vercel.app/api/products')
+        axiosInstance.get('products')
             .then(res => {
                 setproducts(res.data)
             })
@@ -80,7 +76,15 @@ function List() {
             width: 200,
             renderCell: (params: any) => {
                 // return <Button onClick={() => removeProduct(params.id)} variant="outlined" color="error">Delete</Button>
-                return <BYZButton backColor='blue' onClick={() => removeProduct(params.id)} color="error">Delete</BYZButton>
+                return <BYZButton onClick={() => removeProduct(params.id)} color="error">Delete</BYZButton>
+            }
+        },
+        {
+            field:"detail",
+            headerName:"Detail",
+            width:200,
+            renderCell:(params:any)=>{
+                return <BYZButton onClick={() => navigate(`/products/${params.id}`)}  color="primary"> Detail</BYZButton>
             }
         }
     ]
@@ -89,7 +93,7 @@ function List() {
     return (<>
 
         <BYZGrid
-            gridHeight={1000}
+            gridHeight={400}
             gridTitle='Products'
             rows={products}
             columns={gridColumns}
