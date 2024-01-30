@@ -6,6 +6,7 @@ import Suppliers from './suppliers'
 import Products from './products'
 import Header from '../../components/layout-components/header'
 import Footer from '../../components/layout-components/footer'
+import Orders from './orders'
 
 function PrivateLayout() {
   return (<>
@@ -16,6 +17,7 @@ function PrivateLayout() {
       <Route path="/request/*" element={<Request />} />
       <Route path='/suppliers/*' element={<Suppliers />} />
       <Route path='/products/*' element={<Products />} />
+      <Route path='/orders/*' element={<Orders/>} />
       {/* <Route path="/education/*" element={<></>} /> */}
     </Routes>
 

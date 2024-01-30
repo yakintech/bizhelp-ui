@@ -29,9 +29,6 @@ function Detail() {
     <p>Price: {detail.unitPrice}</p>
     <p>Stock: {detail.unitsInStock}</p>
     <p>Quantity Per Unit: {detail.quantityPerUnit}</p>
-
-
-
   </>
   )
 }
