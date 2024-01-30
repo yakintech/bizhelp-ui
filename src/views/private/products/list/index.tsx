@@ -1,16 +1,22 @@
 import { GridColDef } from '@mui/x-data-grid'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import BYZButton from '../../../../components/core-componens/button'
 import BYZGrid from '../../../../components/core-componens/grid'
 import { axiosInstance } from '../../../../network/axiosInstance'
 import { useNavigate } from 'react-router-dom'
+import { FavoritesContext } from '../../../../contexts/FavoritesContext'
+import { Button } from '@mui/material'
 
 
 function List() {
 
     const [products, setproducts] = useState([])
 
+    
+
     const navigate = useNavigate()
+
+    const { addFavorite, favorites, removeFavorite } = useContext(FavoritesContext)
 
     useEffect(() => {
         loadProducts()
@@ -22,7 +28,7 @@ function List() {
         const confirm = window.confirm('Are you sure?')
         if (!confirm) return
 
-        
+
 
         axiosInstance.delete(`products/${id}`)
             .then(res => {
@@ -66,11 +72,6 @@ function List() {
             width: 200
         },
         {
-            field: 'unitsInStock',
-            headerName: 'Units In Stock',
-            width: 200
-        },
-        {
             field: 'delete',
             headerName: 'Delete',
             width: 200,
@@ -80,11 +81,29 @@ function List() {
             }
         },
         {
-            field:"detail",
-            headerName:"Detail",
-            width:200,
-            renderCell:(params:any)=>{
-                return <BYZButton onClick={() => navigate(`/products/${params.id}`)}  color="primary"> Detail</BYZButton>
+            field: "detail",
+            headerName: "Detail",
+            width: 150,
+            renderCell: (params: any) => {
+                return <BYZButton onClick={() => navigate(`/products/${params.id}`)} color="primary"> Detail</BYZButton>
+            }
+        },
+        {
+            field: "addtofav",
+            headerName: "Add to Fav",
+            width: 150,
+            renderCell: (params: any) => {
+
+                var favoriteExists = favorites.find((fav: any) => fav.id == params.row.id)
+
+                if (favoriteExists) {
+                    return <Button onClick={() => removeFavorite(params.row)} variant='outlined' color='error'>Remove</Button>
+                }
+                else{
+                    return <Button onClick={() => addFavorite(params.row)} variant='outlined'>Add to fav</Button>
+                }
+
+               
             }
         }
     ]
