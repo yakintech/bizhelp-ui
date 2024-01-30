@@ -6,13 +6,15 @@ import { axiosInstance } from '../../../../network/axiosInstance'
 import { useNavigate } from 'react-router-dom'
 import { FavoritesContext } from '../../../../contexts/FavoritesContext'
 import { Button } from '@mui/material'
+import { CartContext, CartModel } from '../../../../contexts/CartContext'
 
 
 function List() {
 
     const [products, setproducts] = useState([])
 
-    
+    const { addtoCart } = useContext(CartContext)
+
 
     const navigate = useNavigate()
 
@@ -45,6 +47,20 @@ function List() {
             .then(res => {
                 setproducts(res.data)
             })
+    }
+
+
+    const addProductToCart = (item : any) => {
+
+        let newCartItem : CartModel = {
+            id : item.id,
+            name : item.name,
+            price : item.unitPrice,
+            quantity : 1
+        }
+
+        addtoCart(newCartItem)
+
     }
 
     const gridColumns: GridColDef[] = [
@@ -99,13 +115,22 @@ function List() {
                 if (favoriteExists) {
                     return <Button onClick={() => removeFavorite(params.row)} variant='outlined' color='error'>Remove</Button>
                 }
-                else{
+                else {
                     return <Button onClick={() => addFavorite(params.row)} variant='outlined'>Add to fav</Button>
                 }
 
-               
+
+            }
+        },
+        {
+            field: "addtocart",
+            headerName: "Add to Cart",
+            width: 150,
+            renderCell: (params: any) => {
+                return <BYZButton onClick={() => addProductToCart(params.row)} color="success"> Add to Cart</BYZButton>
             }
         }
+        
     ]
 
 

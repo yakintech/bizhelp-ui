@@ -8,6 +8,7 @@ import Header from '../../components/layout-components/header'
 import Footer from '../../components/layout-components/footer'
 import Orders from './orders'
 import Favorites from './favorites'
+import CartPage from './cart'
 
 function PrivateLayout() {
   return (<>
@@ -20,6 +21,7 @@ function PrivateLayout() {
       <Route path='/products/*' element={<Products />} />
       <Route path='/orders/*' element={<Orders/>} />
       <Route path='/favorites/*' element={<Favorites/>} />
+      <Route path='/cart' element={<CartPage/>} />
       {/* <Route path="/education/*" element={<></>} /> */}
     </Routes>
 
