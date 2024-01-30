@@ -3,7 +3,16 @@ import { axiosInstance } from '../../../../network/axiosInstance'
 import { DataGrid, GridColDef } from '@mui/x-data-grid'
 import dayjs from 'dayjs'
 
+//import TR format for dayjs
+import 'dayjs/locale/tr'
+
 function List() {
+
+
+    //dayjs locale
+    dayjs.locale("tr")
+
+    dayjs('2019-01-25').unix() 
 
     const [orders, setorders] = useState<Order[]>([])
 
@@ -56,6 +65,12 @@ function List() {
             width: 250,
             renderCell: (params) => {
                 let shippedDate = params.value
+
+                //gecikme var mı kontrol ediyorum isBefore, isAfter ile
+                let delayCheck = dayjs(shippedDate).isAfter(dayjs(params.row?.requiredDate))
+                console.log(delayCheck);
+                
+
                 return (<span> {dayjs(shippedDate, "YYYY-MM-DD").format("DD MMMM YYYY dddd HH:mm")}</span>)
             }
         },
@@ -67,12 +82,20 @@ function List() {
             renderCell:(params)=>{
                 let shippedDate = params.row?.shippedDate
                 let requiredDate = params.row?.requiredDate
-                let difference = dayjs(shippedDate).diff(dayjs(requiredDate), "days")
+                let difference = dayjs(shippedDate).diff(dayjs(requiredDate))
+
+                console.log("difference", difference);
+
+         
+                //miliseconds to days, hours, minutes, seconds
+             
                 
-                if(difference < 0){
-                    difference = 0
-                }
-                return (<span style={{backgroundColor:'red'}}>{difference}</span>)
+       
+                
+                // if(difference < 0){
+                //     difference = 0
+                // }
+                return (<span> days</span>)
             }
 
         }
