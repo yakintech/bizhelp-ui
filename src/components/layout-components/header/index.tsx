@@ -15,6 +15,7 @@ function Header() {
         <li><Link to='/products/create'>Create Product</Link></li>
         <li><Link to='/suppliers'>Suppliers</Link></li>
         <li><Link to='/suppliers/create'>Create Supplier</Link></li>
+        <li><Link to='/customers'>Customers</Link></li>
         <li><Link to='/cart/'>Cart <span style={{ color: 'red' }}>({cart.length})</span></Link></li>
         <li><Link to='/orders'>Orders</Link></li>
         <li><Link to='/favorites'>Favorites <span style={{ color: 'red' }}>({favorites.length})</span></Link></li>
