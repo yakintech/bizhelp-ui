@@ -24,6 +24,16 @@ export const categoryService = {
             throw error;
         }
     },
+    add: async (data: any) => {
+        try {
+            var response = await baseService.add("categories", data);
+            return response;
+
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
+    }
 
 }
 

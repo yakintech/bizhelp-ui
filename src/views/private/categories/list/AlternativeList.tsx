@@ -4,19 +4,11 @@ import { categoryService } from '../../../../network/category/categoryService'
 
 function AlternativeList() {
 
-    const { data : response, isLoading } = useQuery("getAllCategories", categoryService.getAll)
+    const { data: response, isLoading } = useQuery("getAllCategories", categoryService.getAll, {
 
-    useEffect(() => {
-      
-        categoryService.getAll().then((res) => {
-            
-        }
-        )
-      
-    }, [])
-    
-
-
+        // refetchInterval: 20000,
+        // staleTime: 1000,
+    })
 
     return (<>
         {
