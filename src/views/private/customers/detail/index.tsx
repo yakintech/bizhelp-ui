@@ -12,7 +12,7 @@ function Detail() {
     useEffect(() => {
       
         baseService.getById('customers', id?.toUpperCase()).then((res) => {
-            setdetail(res.data)
+           // setdetail(res.data)
         })
     
       

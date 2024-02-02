@@ -13,6 +13,7 @@ function Header() {
       <ul style={{ display: 'flex', justifyContent: 'space-between' }}>
         <li><Link to='/products'>Products</Link></li>
         <li><Link to='/products/create'>Create Product</Link></li>
+        <li><Link to='/categories'>Categories</Link></li>
         <li><Link to='/suppliers'>Suppliers</Link></li>
         <li><Link to='/suppliers/create'>Create Supplier</Link></li>
         <li><Link to='/customers'>Customers</Link></li>

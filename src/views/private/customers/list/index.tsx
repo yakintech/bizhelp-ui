@@ -13,7 +13,7 @@ function List() {
         baseService.get('customers').then((res) => {
             
             if(res.statusCode == 200){
-                setcustomers(res.data)
+               // setcustomers(res.data)
             }
           
         })
