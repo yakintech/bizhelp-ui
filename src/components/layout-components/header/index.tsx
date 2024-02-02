@@ -13,6 +13,7 @@ function Header() {
       <ul style={{ display: 'flex', justifyContent: 'space-between' }}>
         <li><Link to='/products'>Products</Link></li>
         <li><Link to='/products/create'>Create Product</Link></li>
+        <li><Link to='/github'>Github</Link></li>
         <li><Link to='/categories'>Categories</Link></li>
         <li><Link to='/suppliers'>Suppliers</Link></li>
         <li><Link to='/suppliers/create'>Create Supplier</Link></li>
@@ -21,6 +22,7 @@ function Header() {
         <li><Link to='/orders'>Orders</Link></li>
         <li><Link to='/favorites'>Favorites <span style={{ color: 'red' }}>({favorites.length})</span></Link></li>
         <li><Link to='/cart/'>Cart</Link></li>
+   
 
       </ul>
     </nav>

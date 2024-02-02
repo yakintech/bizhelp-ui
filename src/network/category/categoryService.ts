@@ -1,9 +1,10 @@
+import { CategoryModel } from "../../model/category";
 import { baseService } from "../baseService";
 
 
 export const categoryService = {
 
-    getAll: async () => {
+    getAll: async ()  => {
         try {
             var response = await baseService.get<CategoryModel[]>("categories");
             return response;
@@ -26,9 +27,3 @@ export const categoryService = {
 
 }
 
-
-export interface CategoryModel {
-    id: number;
-    name: string;
-    description: string;
-}

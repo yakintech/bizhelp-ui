@@ -12,6 +12,7 @@ export const baseService = {
             response.data = axiosResponse.data;
             response.success = true;
             response.statusCode = axiosResponse.status;
+            response.errorMessage = "";
 
             return response;
 

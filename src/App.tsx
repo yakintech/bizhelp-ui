@@ -3,10 +3,6 @@ import Views from './views'
 
 function App() {
 
-
-
-
-
   return (<>
     <Views />
   </>
