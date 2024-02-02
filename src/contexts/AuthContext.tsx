@@ -1,4 +1,6 @@
+import axios from "axios";
 import { createContext, useEffect, useState } from "react";
+import tokenService from "../utils/auth/tokenService";
 
 
 export const AuthContext = createContext({} as AuthContextType)
@@ -13,29 +15,42 @@ export const AuthContextProvider = ({ children }: any) => {
     useEffect(() => {
 
         
-            const isAuth = localStorage.getItem('isAuth');
-            if (isAuth === 'true') {
-                setisAuth(true);
-                setLoading(false)
-            } else {
-                setisAuth(false);
-                setLoading(false)
+            const token = tokenService.getToken();
+
+
+            if (token) {
+                axios.get('http://localhost:8080/api/users', {
+                    headers: {
+                        authorization: `Bearer ${token}`
+                    }
+                }).then((res) => {
+                    if (res.data) {
+                        setisAuth(true);
+                    }
+                    setLoading(false);
+                }
+                ).catch(() => {
+                    setLoading(false);
+                })
+            }
+            else {
+                setLoading(false);
+
             }
        
 
     }, [])
 
 
-    const login = (userId: string) => {
+    const login = (token:string) => {
         setisAuth(true);
-        setuserId(userId);
-        localStorage.setItem('isAuth', 'true');
+        tokenService.setToken(token);
     }
 
     const logout = () => {
         setisAuth(false);
         setuserId('');
-        localStorage.setItem('isAuth', 'false');
+        tokenService.removeToken();
     }
 
     return <AuthContext.Provider value={{ isAuth, userId, login, logout, loading, setLoading }}>

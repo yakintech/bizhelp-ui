@@ -12,6 +12,7 @@ import CartPage from './cart'
 import Customers from './customers'
 import Categories from './categories'
 import GithubProfile from './github'
+import Users from './users'
 
 function PrivateLayout() {
   return (<>
@@ -28,6 +29,7 @@ function PrivateLayout() {
       <Route path='/customers/*' element={<Customers/>} />
       <Route path='/categories/*' element={<Categories/>} />
       <Route path='/github' element={<GithubProfile/>} />
+      <Route path='/users/*' element={<Users/>} />
       {/* <Route path="/education/*" element={<></>} /> */}
     </Routes>
 

@@ -1,9 +1,27 @@
+import tokenService from "../utils/auth/tokenService";
 import { axiosInstance } from "./axiosInstance"
 
 
 export const baseService = {
     //Tüm get requestlerini buradan yapacağız.
     get: async <T>(url: string): Promise<ResponseType<T>> => {
+
+        var token = tokenService.getToken();
+
+        axiosInstance.interceptors.request.use((config) => {
+            if (token) {
+                config.headers.Authorization = `Bearer ${token}`;
+            }
+
+            return config;
+        }
+            , (error) => {
+                // Do something with request error
+                console.log("Request error");
+                return Promise.reject(error);
+            });
+
+
         try {
             let response: ResponseType<T> = {}
 
