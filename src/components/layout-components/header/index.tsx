@@ -10,7 +10,7 @@ function Header() {
 
   return (<>
     <nav>
-      <ul style={{ display: 'flex', justifyContent: 'space-between' }}>
+      <ul>
         <li><Link to='/products'>Products</Link></li>
         <li><Link to='/products/create'>Create Product</Link></li>
         <li><Link to='/github'>Github</Link></li>
