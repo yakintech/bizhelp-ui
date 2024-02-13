@@ -5,7 +5,7 @@ function Footer() {
     return (<>
         <footer>
             <p>Footer</p>
-            <h4 className={styles.title}>İstanbul</h4>
+            {/* <h4 className={styles.title}>İstanbul</h4> */}
         </footer>
     </>
     )

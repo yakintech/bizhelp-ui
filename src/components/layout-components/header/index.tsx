@@ -22,6 +22,7 @@ function Header() {
         <li><Link to='/orders'>Orders</Link></li>
         <li><Link to='/favorites'>Favorites <span style={{ color: 'red' }}>({favorites.length})</span></Link></li>
         <li><Link to='/cart/'>Cart</Link></li>
+        <li><Link to="/jobs">Jobs</Link></li>
    
 
       </ul>
